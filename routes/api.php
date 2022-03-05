@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CategoriaController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -24,7 +25,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('register', [AuthController::class, 'register']);
 Route::post('login', [AuthController::class, 'login']);
+Route::get('products', [ProductController::class, 'index']);
+Route::get('categories', [CategoriaController::class, 'index']);
+//Con esto indico que solamente lo que esta logeado podrán utilizar el get products
 Route::middleware(['auth:sanctum'])->group(function(){
     Route::get('logout', [AuthController::class, 'logout']);
-    Route::get('products', [ProductController::class, 'index']);
+    
 });

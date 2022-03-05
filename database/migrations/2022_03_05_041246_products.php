@@ -13,11 +13,14 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('description');
             $table->float('amount');
+            $table->unsignedInteger('categoria_id');
+            $table->foreign('categoria_id')->references('id_categoria')->on('categorias');
             $table->timestamps();
         });
     }
